@@ -14,7 +14,7 @@ class Nomics
     @api_key = api_key
   end
 
-  def currencies_ticker(tickers: [], options: {})
+  def currencies_ticker(tickers: [], filters: [], options: {})
     request_payload = NomicsPayloadBuilder.new(
       tickers: tickers,
       options: options
@@ -22,7 +22,10 @@ class Nomics
 
     uri = build_uri(path: 'currencies/ticker', payload: request_payload)
 
-    response(uri)
+    NomicsFilterBuilder.new(
+      response_hash: response(uri),
+      filters: filters
+    ).apply_filters
   end
 
   private
