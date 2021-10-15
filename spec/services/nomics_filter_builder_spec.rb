@@ -34,5 +34,14 @@ RSpec.describe NomicsFilterBuilder do
         ).apply_filters
       ).to eq(expected_response)
     end
+
+    it 'raises an Nomics::APIError if the filters are not an array' do
+      expect {
+        described_class.new(
+          response_hash: response_hash,
+          filters: 'incorrect value'
+        ).apply_filters
+      }.to raise_error(Nomics::APIError, "Provided filters have to be an array. I.e ['circulating_supply', 'max_supply', 'name']")
+    end
   end
 end

@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe NomicsPayloadBuilder do
   describe '#payload' do
     let(:tickers) { %w[ETH SOL BCH] }
+    let(:options) { {} }
 
     context 'when options are present' do
       let(:options) {
@@ -39,8 +40,6 @@ RSpec.describe NomicsPayloadBuilder do
         }
       }
 
-      let(:options) { {} }
-
       it 'builds a payload that is compliant with Nomics API' do
         expect(
           described_class.new(
@@ -49,6 +48,24 @@ RSpec.describe NomicsPayloadBuilder do
           ).payload
         ).to eq(expected_payload)
       end
+    end
+
+    it 'raises an Nomics::APIError if the tickers are not an array' do
+      expect {
+        described_class.new(
+          tickers: 'wrong value',
+          options: options
+        ).payload
+      }.to raise_error(Nomics::APIError, "Provided tickers have to be an array. I.e ['ETH', 'BCH']")
+    end
+
+    it 'raises an Nomics::APIError if the options are not a hash' do
+      expect {
+        described_class.new(
+          tickers: tickers,
+          options: 'wrong value'
+        ).payload
+      }.to raise_error(Nomics::APIError, 'Provided options have to be a Hash. I.e { per_page => 100, page => 1 }')
     end
   end
 end

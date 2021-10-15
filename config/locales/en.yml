@@ -33,4 +33,7 @@ en:
   services:
     nomics:
       errors:
-        missing_key: 'Please provide your API key.'
+        missing_key: Please provide your API key.
+        filters_format: Provided filters have to be an array. I.e ['circulating_supply', 'max_supply', 'name']
+        tickers_format: Provided tickers have to be an array. I.e ['ETH', 'BCH']
+        options_format: Provided options have to be a Hash. I.e { per_page => 100, page => 1 }
