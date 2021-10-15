@@ -41,7 +41,7 @@ RSpec.describe Nomics do
     end
   end
 
-  describe '#currencies_ticker' do
+  describe '#currencies_ticker' do # rubocop:disable RSpec/MultipleMemoizedHelpers
     let(:unfiltered_api_response) do
       File.read('spec/fixtures/currencies_ticker_response.json')
     end
@@ -124,7 +124,7 @@ RSpec.describe Nomics do
       }.to raise_exception(described_class::APIError)
     end
 
-    context 'when options are present' do
+    context 'when options are present' do # rubocop:disable RSpec/MultipleMemoizedHelpers
       let(:options) {
         {
           per_page: 1,
