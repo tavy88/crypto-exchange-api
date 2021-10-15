@@ -9,6 +9,8 @@ RSpec.describe Nomics do
 
   let(:api_key) { 'test' }
 
+  let(:api_endpoint) { "#{described_class::BASE_URL}currencies/ticker" }
+
   describe 'API BASE_URL' do
     it 'defines the correct API base url' do
       expect(described_class::BASE_URL).to eq('https://api.nomics.com/v1/')
@@ -44,7 +46,6 @@ RSpec.describe Nomics do
       File.read('spec/fixtures/currencies_ticker_response.json')
     end
 
-    let(:api_endpoint) { "#{described_class::BASE_URL}currencies/ticker" }
     let(:options) { {} }
     let(:tickers) { %w[ETH BTC XRP] }
     let(:expected_response) do
@@ -54,7 +55,7 @@ RSpec.describe Nomics do
       }
     end
 
-    it 'returns an unfiltered response for currency tickers ETH, BTC, XRP' do
+    it 'returns a successful response for currency tickers ETH, BTC, XRP' do
       stub_request(:get, api_endpoint)
         .with(
           query: {
@@ -166,6 +167,43 @@ RSpec.describe Nomics do
           )
         ).to eq(expected_response)
       end
+    end
+  end
+
+  describe '#convert' do
+    let(:two_currencies_ticker_response) do
+      File.read('spec/fixtures/2_currencies_ticker_response.json')
+    end
+
+    let(:expected_response) {
+      {
+        response: '1 ETH = 0.06343353940548098 BTC'
+      }
+    }
+
+    it 'returns a conversion between two cryptos' do
+      stub_request(:get, api_endpoint)
+        .with(
+          query: {
+            'key' => 'test',
+            'ids' => 'ETH,BTC',
+            'per-page' => '100',
+            'page' => '1',
+            'convert' => 'USD'
+          }
+        )
+        .to_return(
+          status: 200,
+          body: two_currencies_ticker_response,
+          headers: { 'X-Pagination-Total-Items' => 2 }
+        )
+
+      expect(
+        service.convert(
+          from: 'ETH',
+          to: 'BTC'
+        )
+      ).to eq(expected_response)
     end
   end
 end

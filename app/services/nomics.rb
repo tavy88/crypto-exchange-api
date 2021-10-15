@@ -28,6 +28,16 @@ class Nomics
     ).apply_filters
   end
 
+  def convert(from:, to:)
+    calculation = CoinConversion.new(
+      from: from,
+      to: to,
+      data: currencies_ticker(tickers: [from, to], filters: %w[id price])[:response]
+    )
+
+    { response: calculation.result }
+  end
+
   private
 
   def response(uri)

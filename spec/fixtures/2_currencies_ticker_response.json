@@ -1,0 +1,91 @@
+// 20211015161344
+// https://api.nomics.com/v1/currencies/ticker?key=your-key&ids=BTC,ETH,XRP
+
+
+[
+  {
+    "id": "BTC",
+    "currency": "BTC",
+    "symbol": "BTC",
+    "name": "Bitcoin",
+    "logo_url": "https://s3.us-east-2.amazonaws.com/nomics-api/static/images/currencies/btc.svg",
+    "status": "active",
+    "price": "51437.20430407",
+    "price_date": "2021-10-15T00:00:00Z",
+    "price_timestamp": "2021-10-15T11:58:00Z",
+    "circulating_supply": "18844375",
+    "max_supply": "21000000",
+    "market_cap": "969301966858",
+    "market_cap_dominance": "0.4148",
+    "num_exchanges": "393",
+    "num_pairs": "66305",
+    "num_pairs_unmapped": "5170",
+    "first_candle": "2011-08-18T00:00:00Z",
+    "first_trade": "2011-08-18T00:00:00Z",
+    "first_order_book": "2017-01-06T00:00:00Z",
+    "rank": "1",
+    "rank_delta": "0",
+    "high": "53444.46892731",
+    "high_timestamp": "2021-04-13T00:00:00Z",
+    "1d": {
+      "volume": "49778902677.72",
+      "price_change": "1757.33501248",
+      "price_change_pct": "0.0354",
+      "volume_change": "2714246635.20",
+      "volume_change_pct": "0.0577",
+      "market_cap_change": "33160293779.01",
+      "market_cap_change_pct": "0.0354"
+    },
+    "30d": {
+      "volume": "1259045653138.62",
+      "price_change": "10643.79417635",
+      "price_change_pct": "0.2609",
+      "volume_change": "-48243693723.53",
+      "volume_change_pct": "-0.0369",
+      "market_cap_change": "201711500593.47",
+      "market_cap_change_pct": "0.2628"
+    }
+  },
+  {
+    "id": "ETH",
+    "currency": "ETH",
+    "symbol": "ETH",
+    "name": "Ethereum",
+    "logo_url": "https://s3.us-east-2.amazonaws.com/nomics-api/static/images/currencies/eth.svg",
+    "status": "active",
+    "price": "3262.84392613",
+    "price_date": "2021-10-15T00:00:00Z",
+    "price_timestamp": "2021-10-15T11:58:00Z",
+    "circulating_supply": "117936060",
+    "market_cap": "384806956223",
+    "market_cap_dominance": "0.1647",
+    "num_exchanges": "418",
+    "num_pairs": "52335",
+    "num_pairs_unmapped": "48688",
+    "first_candle": "2015-08-07T00:00:00Z",
+    "first_trade": "2015-08-07T00:00:00Z",
+    "first_order_book": "2018-08-29T00:00:00Z",
+    "rank": "2",
+    "rank_delta": "0",
+    "high": "3443.38726744",
+    "high_timestamp": "2021-05-11T00:00:00Z",
+    "1d": {
+      "volume": "28577441598.41",
+      "price_change": "42.37529601",
+      "price_change_pct": "0.0132",
+      "volume_change": "-7683304199.00",
+      "volume_change_pct": "-0.2119",
+      "market_cap_change": "5040596877.75",
+      "market_cap_change_pct": "0.0133"
+    },
+    "30d": {
+      "volume": "880908193312.99",
+      "price_change": "203.35719978",
+      "price_change_pct": "0.0665",
+      "volume_change": "-138299579586.89",
+      "volume_change_pct": "-0.1357",
+      "market_cap_change": "25215916749.40",
+      "market_cap_change_pct": "0.0701"
+    }
+  }
+]
