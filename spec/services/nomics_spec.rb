@@ -61,7 +61,8 @@ RSpec.describe Nomics do
             'key' => 'test',
             'ids' => 'ETH,BTC,XRP',
             'per-page' => '100',
-            'page' => '1'
+            'page' => '1',
+            'convert' => 'USD'
           }
         )
         .to_return(
@@ -85,7 +86,8 @@ RSpec.describe Nomics do
             'key' => 'test',
             'ids' => 'ETH,BTC,XRP',
             'per-page' => '100',
-            'page' => '1'
+            'page' => '1',
+            'convert' => 'USD'
           }
         )
         .to_return(
@@ -107,7 +109,8 @@ RSpec.describe Nomics do
             'key' => 'test',
             'ids' => 'ETH,BTC,XRP',
             'per-page' => '100',
-            'page' => '1'
+            'page' => '1',
+            'convert' => 'USD'
           }
         )
         .to_raise(Net::ReadTimeout)
@@ -146,7 +149,8 @@ RSpec.describe Nomics do
               'key' => 'test',
               'ids' => 'ETH,BTC,XRP',
               'per-page' => '1',
-              'page' => '2'
+              'page' => '2',
+              'convert' => 'USD'
             }
           )
           .to_return(

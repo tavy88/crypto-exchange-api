@@ -1,15 +1,29 @@
 require 'rails_helper'
 
 RSpec.describe NomicsPayloadBuilder do
+  describe 'PER_PAGE' do
+    it 'defines the default per page value' do
+      expect(described_class::PER_PAGE).to eq(100)
+    end
+  end
+
+  describe 'DEFAULT_CURRENCY' do
+    it 'defines the default currency value' do
+      expect(described_class::DEFAULT_CURRENCY).to eq('USD')
+    end
+  end
+
   describe '#payload' do
     let(:tickers) { %w[ETH SOL BCH] }
     let(:options) { {} }
+    let(:currency) { 'GBP' }
 
     context 'when options are present' do
       let(:options) {
         {
           per_page: 1,
-          page: 3
+          page: 3,
+          currency: currency
         }
       }
 
@@ -17,6 +31,7 @@ RSpec.describe NomicsPayloadBuilder do
         {
           ids: 'ETH,SOL,BCH',
           page: 3,
+          convert: currency,
           'per-page' => 1
         }
       }
@@ -36,6 +51,7 @@ RSpec.describe NomicsPayloadBuilder do
         {
           ids: 'ETH,SOL,BCH',
           page: 1,
+          convert: 'USD',
           'per-page' => 100
         }
       }

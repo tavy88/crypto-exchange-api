@@ -2,6 +2,7 @@ class NomicsPayloadBuilder
   attr_reader :tickers, :options
 
   PER_PAGE = 100
+  DEFAULT_CURRENCY = 'USD'.freeze
 
   def initialize(tickers:, options:)
     @tickers = tickers
@@ -15,6 +16,7 @@ class NomicsPayloadBuilder
 
     {
       ids: tickers.join(','),
+      convert: options[:currency] || DEFAULT_CURRENCY,
       page: options[:page] || 1,
       'per-page' => options[:per_page] || PER_PAGE
     }
