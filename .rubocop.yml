@@ -1,0 +1,48 @@
+AllCops:
+  DisplayCopNames: true
+  DisplayStyleGuide: true
+  TargetRubyVersion: 2.6.3
+  Exclude:
+    - 'db/schema.rb'
+    - 'vendor/**/*'
+    - bin/**
+    - db/**/*
+    - 'node_modules/**/*'
+    - 'tmp/**/*'
+    - 'config/initializers/canonical_rails.rb'
+    - 'config/puma.rb'
+    - 'spec/spec_helper.rb'
+Style/FrozenStringLiteralComment:
+  Enabled: false
+Style/Documentation:
+  Enabled: false
+Metrics/AbcSize:
+  Max: 20
+Layout/LineLength:
+  Max: 120
+Style/GuardClause:
+  MinBodyLength: 2
+Layout/AccessModifierIndentation:
+  Enabled: false
+Style/BlockDelimiters:
+  EnforcedStyle: semantic
+  AllowBracesOnProceduralOneLiners: true
+  FunctionalMethods:
+    - before
+    - given
+    - given!
+    - watch
+    - times
+    - try
+    # logger methods that can take blocks
+    - debug
+    - error
+    - info
+    - warning
+    # Rubocop defaults which may otherwise be overwritten
+    - let
+    - let!
+    - subject
+    - watch
+    - html
+    - json
