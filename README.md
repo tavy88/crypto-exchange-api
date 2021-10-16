@@ -175,3 +175,10 @@ Errors codes are inherited from Nomics API
 200: {response: }, where the response is a String that shows the conversion
 
 Errors codes are inherited from Nomics API
+
+## Live version
+
+https://crypto-exchange-api.herokuapp.com/currencies?ids=ETH,BTC,SOL,XRP (adjust params as you wish)
+https://crypto-exchange-api.herokuapp.com/convert?from=ETH&to=SOL (adjust params as you wish)
+
+
