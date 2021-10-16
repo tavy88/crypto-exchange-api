@@ -14,20 +14,25 @@ application up and running.
     
     c. Open ```.env.development``` and add your Nomics ```API_KEY```. If you wish you can also use ```.env.development.local``` which is .gitingored
     
-    d. Open a rails console ```rails console``` to start playing with the services.
+    d. Open a rails console ```rails console``` if you want to start playing with the services.
+
+    e. Start the server ```rails s``` to interact with the API directly
     
-## Rspec
+## Tests
 
-To run the tests just run ```rspec```:
+To run the tests just run ```rspec```
 
-```
-....................
+## Services
 
-Finished in 0.05624 seconds (files took 1.73 seconds to load)
-20 examples, 0 failures
-```
+1. Nomics - the Nomics API Wrapper
+
+2. NomicsFilterBuilder - builds and applies the filters (e.g circulating_supply, max_supply, name, symbol, price) on the Nomics API
+
+3. NomicsPauloadBuilder - prepares the query string for the Nomics API
+
+4. CoinConversion - does the conversion of one crypto to another
     
-## Showcase
+## Showcase if you use rails console
 
 ### 1. Retrieve a list of cryptocurrencies given set of tickers
 
@@ -84,3 +89,89 @@ irb(main):004:0> Nomics.new.currencies_ticker(tickers: ['ETH', 'BTC', 'XRP'],  f
 => {:response=>[{"id"=>"ETH", "name"=>"Ethereum"}], :total_items=>"3"}
 ```
 
+
+## Showcase - if you want to use the app's API
+
+### 1. Retrieve a list of cryptocurrencies given set of tickers
+
+Ie: Given an array of [‘BTC’, ‘XRP’, ‘ETH’]. I want to get the full payload of those cryptocurrencies
+
+#### API call:
+
+```
+GET /currencies?ids=ETH,BTC,XRP
+```
+
+### 2. Retrieve a (list) specific crypto currency and specific values based on the ticker and any other dynamic params
+
+Ie: We want to view the [circulating_supply, max_supply, name, symbol, price] for [ETH,BTC]
+
+#### API call:
+
+```
+GET /currencies?ids=ETH,BTC,XRP&filter=circulating_supply,max_supply,name,symbol,price
+```
+
+
+### 3. Retrieve a specific cryptocurrency to specific fiat. 
+Ie: BTC in ZAR or ETH in USD
+
+#### API call:
+
+```
+GET /currencies?ids=ETH&currency=ZAR
+```
+
+### 4. Calculate the price of one cryptocurrency from another, in relation to their dollar value
+
+Ie: 1BTC = $100, 1ETH = $50, therefore 1ETH == 0.5BTC
+
+#### API call:
+
+```
+GET /convert?from=ETH&to=BTC
+```
+
+### Pagination
+
+```
+GET /currencies?ids=ETH,BTC,XRP&per_page=1&page=2
+```
+
+```
+GET /currencies?ids=ETH,BTC,XRP&per_page=100&page=1
+```
+
+
+## API Documentation
+
+### GET /currencies
+
+#### Params:
+
+1. ids (mandatory) - a list of comma separated ids (see the examples above)
+
+2. filters (optional) - a list of comma separated attributes e.g circulating_supply,max_supply,name,symbol,price
+
+3. currency (optional, defaults to USD) - String e.g USD, GBP.
+
+4. per_page (optional, defaults to 100) - Integer - amount of results per page
+
+5. page (optional) - Integer - page number
+
+#### Response
+
+200: {response: , total_items: }, where the response is an Array of hashes with the payloads coming from Nomics, and total_items is the amount of total items - needed for pagination
+
+Errors codes are inherited from Nomics API
+
+### GET /convert
+
+#### Params:
+
+1. from (mandatory) - the id of the crypto you want to convert from (e.g BTC)
+2. to (mandatory) - the id of the crypto you want to convert into (e.g ETH)
+
+200: {response: }, where the response is a String that shows the conversion
+
+Errors codes are inherited from Nomics API
